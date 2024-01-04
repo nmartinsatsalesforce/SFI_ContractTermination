@@ -1,0 +1,40 @@
+<template>
+    <lightning-card>
+        <template if:true={showTable}>
+            <template if:true={tableHeader}>
+                <h1 style="font-size:15px;">
+                    <strong>{tableHeader}</strong>
+                </h1>
+            </template>
+            <br>
+            <div class="demo-datatable-container">
+                <c-salesforce-codex-data-table columns={_columns}
+                                    data={recordsToDisplay}
+                                    key-field={keyField}
+                                    max-row-selection={maxRowSelection}
+                                    hide-checkbox-column={hideCheckboxColumn}
+                                    show-row-number-column={showRowNumberColumn}
+                                    sorted-by={sortedBy}
+                                    sorted-direction={sortedDirection}
+                                    onsort={handleSort}
+                                    onrowselection={handleRowSelection}
+                                    suppress-bottom-bar={suppressBottomBar}
+                                    oncellchange={handlerowchange}
+                >
+                </c-salesforce-codex-data-table>
+            </div>
+            <br>
+            <template if:true={callPaginator}>
+                <c-paginator 
+                    total-records={_rows.length}
+                    records={_rows}
+                    onpaginatorchange={handlePaginatorChange}>
+                </c-paginator>
+            </template>
+        </template>
+
+        <template if:true={error}>
+            <p>{error}</p>
+        </template>
+    </lightning-card>
+</template>
